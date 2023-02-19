@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:great_places/widgets/image_imput.dart';
 
 //add place scrren that open while we tap on the add button
 class addplace extends StatefulWidget {
@@ -30,7 +31,9 @@ class _addplaceState extends State<addplace> {
                     TextField(
                       decoration: InputDecoration(labelText: "title"),
                       controller: _titlecontroller,
-                    )
+                    ),
+                    SizedBox(height: 10,),
+                    imageinput(),
                   ],
                 ),
               ),
@@ -41,9 +44,11 @@ class _addplaceState extends State<addplace> {
             onPressed: () {},
             label: Text("submit"),
             icon: Icon(Icons.add),
-          )
+          ),
         ],
+
       ),
+
     );
   }
 }
