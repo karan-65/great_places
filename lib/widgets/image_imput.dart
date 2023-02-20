@@ -16,8 +16,15 @@ class _imageinputState extends State<imageinput> {
   //function for taking image from camera
   Future<void>_takepicture()async{
     final picker=ImagePicker();
-    final imagfile=await picker.getImage(source: ImageSource.camera,maxWidth: 600);
+    final imagfile=await picker.pickImage(source: ImageSource.camera,maxWidth: 600);
+//code setting the taken image to te view
+    if (imagfile != null) {
+      setState(() {
+        _storedimage = File(imagfile.path);
+      });
   }
+  }
+
 
   @override
   Widget build(BuildContext context) {
