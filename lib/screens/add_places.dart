@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:great_places/provider/great_places.dart';
 import 'package:great_places/widgets/image_imput.dart';
+import 'package:provider/provider.dart';
 
 //add place scrren that open while we tap on the add button
 class addplace extends StatefulWidget {
@@ -13,6 +17,21 @@ class addplace extends StatefulWidget {
 
 class _addplaceState extends State<addplace> {
   final _titlecontroller = TextEditingController();
+  late File _pickedimage;
+
+  void _selectimage(File pickedimage) {
+    _pickedimage = pickedimage;
+  }
+
+  void _savePlace() {
+    if (_titlecontroller.text.isEmpty || _pickedimage == null) {
+      return;
+     }
+    Provider.of<greatplaces>(context, listen: false)
+        .addplace(_titlecontroller.text, _pickedimage);
+    Navigator.of(context).pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,8 +51,10 @@ class _addplaceState extends State<addplace> {
                       decoration: InputDecoration(labelText: "title"),
                       controller: _titlecontroller,
                     ),
-                    SizedBox(height: 10,),
-                    imageinput(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    imageinput(_selectimage),
                   ],
                 ),
               ),
@@ -41,14 +62,12 @@ class _addplaceState extends State<addplace> {
           ),
           Text("..user names"),
           ElevatedButton.icon(
-            onPressed: () {},
+            onPressed: _savePlace,
             label: Text("submit"),
             icon: Icon(Icons.add),
           ),
         ],
-
       ),
-
     );
   }
 }
