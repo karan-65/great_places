@@ -19,7 +19,22 @@ class greatplaces with ChangeNotifier {
         title: pickedtitle);
     _items.add(newplace);
     notifyListeners();
-    dbhelper.insert('table',{'id':newplace.id,'title':newplace.title,'image':newplace.image.path});
+    dbhelper.insert('user_places', {
+      'id': newplace.id,
+      'title': newplace.title,
+      'image': newplace.image.path
+    });
   }
 
+  Future<void> fetchandsetplace() async {
+    final dataalist = await dbhelper.getData('user_places');
+    _items = dataalist
+        .map((item) => Place(
+            id: item['id'],
+            title: item['title'],
+            image: File(item['image']),
+            location: null))
+        .toList();
+    notifyListeners();
+  }
 }
