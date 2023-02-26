@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:great_places/provider/great_places.dart';
 import 'package:great_places/widgets/image_imput.dart';
+import 'package:great_places/widgets/locatin_input.dart';
 import 'package:provider/provider.dart';
 
 //add place scrren that open while we tap on the add button
@@ -55,6 +56,8 @@ class _addplaceState extends State<addplace> {
                       height: 10,
                     ),
                     imageinput(_selectimage),
+                    SizedBox(height: 10,),
+                    Locationinput(),
                   ],
                 ),
               ),
